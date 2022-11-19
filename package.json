@@ -1,7 +1,7 @@
 {
-  "name": "pino-pretty",
+  "name": "pino-pretty-browser",
   "version": "9.1.1",
-  "description": "Prettifier for Pino log lines",
+  "description": "Prettifier for Pino log lines in browser",
   "type": "commonjs",
   "main": "index.js",
   "types": "index.d.ts",
@@ -16,17 +16,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/pinojs/pino-pretty.git"
+    "url": "git+ssh://git@github.com/ZenUml/pino-pretty-browser/.git"
   },
   "keywords": [
     "pino"
   ],
-  "author": "James Sumners <james.sumners@gmail.com>",
+  "author": "Peng Xiao <eagle.xiao@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pinojs/pino-pretty/issues"
+    "url": "https://github.com/ZenUml/pino-pretty-browser/issues"
   },
-  "homepage": "https://github.com/pinojs/pino-pretty#readme",
+  "homepage": "https://github.com/ZenUml/pino-pretty-browser/#readme",
   "precommit": [
     "lint",
     "test"
