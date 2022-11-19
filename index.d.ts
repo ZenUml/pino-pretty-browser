@@ -6,14 +6,10 @@
 
 /// <reference types="node" />
 
-import { Transform } from 'stream';
-import { OnUnknown } from 'pino-abstract-transport';
-// @ts-ignore fall back to any if pino is not available, i.e. when running pino tests
-import { DestinationStream, Level } from 'pino';
 
 type LogDescriptor = Record<string, unknown>;
 
-declare function PinoPretty(options?: PrettyOptions_): PinoPretty.PrettyStream;
+declare function PinoPretty(options?: PrettyOptions_): undefined;
 
 declare function colorizerFactory(
   useColors?: boolean,
@@ -34,6 +30,8 @@ declare function colorizerFactory(
 declare function prettyFactory(
   options: PrettyOptions_,
 ): (inputData: any) => string
+
+declare function write(): (inputData: any) => void
 
 interface PrettyOptions_ {
   /**
@@ -81,11 +79,6 @@ interface PrettyOptions_ {
    * @default "time"
    */
   timestampKey?: string;
-  /**
-   * The minimum log level to include in the output.
-   * @default "trace"
-   */
-  minimumLevel?: Level;
   /**
    * Format output of message, e.g. {level} - {pid} will output message: INFO - 1123
    * @default false
@@ -143,7 +136,7 @@ interface PrettyOptions_ {
    * The file, file descriptor, or stream to write to.  Defaults to 1 (stdout).
    * @default 1
    */
-  destination?: string | number | DestinationStream | NodeJS.WritableStream;
+  destination?: string | number;
   /**
    * Opens the file with the 'a' flag.
    * @default true
@@ -181,10 +174,10 @@ declare namespace PinoPretty {
   type Prettifier = (inputData: string | object) => string;
   type MessageFormatFunc = (log: LogDescriptor, messageKey: string, levelLabel: string) => string;
   type PrettyOptions = PrettyOptions_;
-  type PrettyStream = Transform & OnUnknown;
   type ColorizerFactory = typeof colorizerFactory;
   type PrettyFactory = typeof prettyFactory;
+  type Write = typeof write;
 }
 
 export default PinoPretty;
-export { PinoPretty, PrettyOptions_ as PrettyOptions, colorizerFactory, prettyFactory };
+export { PinoPretty, PrettyOptions_ as PrettyOptions, colorizerFactory, prettyFactory, write };
