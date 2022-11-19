@@ -250,7 +250,35 @@ function build (opts = {}) {
   }, { parse: 'lines' })
 }
 
+function write() {
+  const pretty = prettyFactory( { sync: true, colorize: true, singleLine: true });
+  return function (inputData) {
+    const prettifiedOutput = pretty(inputData);
+    switch (inputData.level) {
+      case 10:
+        console.trace(prettifiedOutput);
+        break;
+      case 20:
+        console.debug(prettifiedOutput);
+        break;
+      case 30:
+        console.info(prettifiedOutput);
+        break;
+      case 40:
+        console.warn(prettifiedOutput);
+        break;
+      case 50:
+      case 60:
+        console.error(prettifiedOutput);
+        break;
+      default:
+        console.log(prettifiedOutput);
+    }
+  }
+}
+
 module.exports = build
 module.exports.prettyFactory = prettyFactory
 module.exports.colorizerFactory = colors
+module.exports.write = write
 module.exports.default = build
